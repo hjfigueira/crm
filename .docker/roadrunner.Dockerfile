@@ -76,4 +76,4 @@ ENV PATH="/app/vendor/bin:/root/.composer/vendor/bin:/usr/local/sbin:/usr/local/
 WORKDIR /app
 
 # Keep the simple top-based entrypoint unless overridden by compose or runtime command
-ENTRYPOINT ["top", "-b"]
+ENTRYPOINT ["./rr", "serve"]
