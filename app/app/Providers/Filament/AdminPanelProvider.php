@@ -18,6 +18,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View as BladeViewContract;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -41,6 +43,10 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 FilamentInfoWidget::class,
             ])
+            ->renderHook(
+                PanelsRenderHook::TOPBAR_START,
+                fn (): BladeViewContract => view('filament.partials.tenant-switcher'),
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

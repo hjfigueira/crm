@@ -12,6 +12,7 @@
         "laravel/octane": "*",
         "laravel/tinker": "^2.10.1",
         "roadrunner-php/laravel-bridge": "*",
+        "spatie/laravel-permission": "*",
         "spiral/roadrunner-cli": "*",
         "spiral/roadrunner-http": "*"
     },
