@@ -51,11 +51,14 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/internal/toml" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/kirschbaum-development/eloquent-power-joins" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laminas/laminas-diactoros" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/boost" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/mcp" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/octane" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/pail" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/pint" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/prompts" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/roster" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/serializable-closure" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/league/commonmark" />
@@ -189,6 +192,7 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/yiisoft/injector" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/_laravel_idea" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
