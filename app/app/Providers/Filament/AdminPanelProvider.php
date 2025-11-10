@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Models\Tenant;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -43,10 +44,6 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 FilamentInfoWidget::class,
             ])
-            ->renderHook(
-                PanelsRenderHook::TOPBAR_START,
-                fn (): BladeViewContract => view('filament.partials.tenant-switcher'),
-            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -60,6 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->tenant(Tenant::class, ownershipRelationship: 'tenant');
     }
 }

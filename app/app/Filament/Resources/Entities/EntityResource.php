@@ -10,6 +10,7 @@ use App\Filament\Resources\Entities\Schemas\EntityForm;
 use App\Filament\Resources\Entities\Schemas\EntityInfolist;
 use App\Filament\Resources\Entities\Tables\EntitiesTable;
 use App\Models\Entity;
+use App\Models\Tenant;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -21,6 +22,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class EntityResource extends Resource
 {
     protected static ?string $model = Entity::class;
+
+    // Used by Filament's tenancy to determine ownership relation on the model
+    public static ?string $tenantOwnershipRelationshipName = 'tenant';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -64,5 +68,25 @@ class EntityResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        $user = auth()->user();
+        $isSuper = $user && method_exists($user, 'hasRole') && ($user->hasRole('Super Admin', null) || $user->hasRole('Super Admin'));
+        if ($isSuper) {
+            return $query;
+        }
+
+        $tenant = app()->bound('currentTenant') ? app('currentTenant') : null;
+        if ($tenant !== null) {
+            $query->where('tenant_id', $tenant->id);
+        } else {
+            $query->whereRaw('1 = 0');
+        }
+
+        return $query;
     }
 }

@@ -14,11 +14,14 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\Permission\Models\Permission;
+use App\Models\Permission;
 
 class PermissionResource extends Resource
 {
     protected static ?string $model = Permission::class;
+
+    // Used by Filament's tenancy to determine ownership relation on the model
+    public static ?string $tenantOwnershipRelationshipName = 'tenant';
 
     protected static null|string|\UnitEnum $navigationGroup = 'Access Control';
 

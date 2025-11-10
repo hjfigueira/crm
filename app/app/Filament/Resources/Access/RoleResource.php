@@ -14,12 +14,15 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 use App\Models\Tenant;
 
 class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
+
+    // Used by Filament's tenancy to determine ownership relation on the model
+    public static ?string $tenantOwnershipRelationshipName = 'tenant';
 
     protected static null|string|\UnitEnum $navigationGroup = 'Access Control';
 
