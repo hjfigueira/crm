@@ -17,11 +17,12 @@ class RoleForm
                 TextInput::make('guard_name')
                     ->required(),
                 Section::make('Permissions')
+                    ->columnSpanFull()
                     ->schema([
                         \Filament\Forms\Components\CheckboxList::make('permissions')
                             ->label('Permissions')
                             ->relationship('permissions', 'name')
-                            ->columns(2),
+                            ->columns(4),
                     ]),
             ]);
     }
