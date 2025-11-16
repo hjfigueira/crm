@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Permission\Models\Role as SpatieRole;
 
@@ -10,6 +11,8 @@ use Spatie\Permission\Models\Role as SpatieRole;
  */
 class Role extends SpatieRole
 {
+    use BelongsToTenant;
+
     /**
      * Get the tenant that owns the role.
      */

@@ -20,10 +20,13 @@ class UserForm
                     ->email()
                     ->required(),
                 DateTimePicker::make('email_verified_at'),
-                \Filament\Forms\Components\CheckboxList::make('roles')
-                    ->label('Roles')
-                    ->relationship('roles', 'name')
-                    ->columns(2),
+                Section::make('Roles')
+                    ->schema([
+                        \Filament\Forms\Components\CheckboxList::make('roles')
+                            ->label('Roles')
+                            ->relationship('roles', 'name')
+                            ->columns(2),
+                    ]),
                 Section::make('Change Password')
                     ->description('Leave blank to keep the current password.')
                     ->collapsible()

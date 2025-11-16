@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Roles\Schemas;
 
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class RoleForm
@@ -16,12 +16,13 @@ class RoleForm
                     ->required(),
                 TextInput::make('guard_name')
                     ->required(),
-                Select::make('tenant_id')
-                    ->relationship('tenant', 'name'),
-                \Filament\Forms\Components\CheckboxList::make('permissions')
-                    ->label('Permissions')
-                    ->relationship('permissions', 'name')
-                    ->columns(2),
+                Section::make('Permissions')
+                    ->schema([
+                        \Filament\Forms\Components\CheckboxList::make('permissions')
+                            ->label('Permissions')
+                            ->relationship('permissions', 'name')
+                            ->columns(2),
+                    ]),
             ]);
     }
 }
