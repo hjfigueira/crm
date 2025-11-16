@@ -39,7 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
@@ -58,16 +58,6 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            // Hide the default top-right user menu via a small CSS override.
-            ->renderHook(
-                PanelsRenderHook::HEAD_END,
-                fn (): BladeViewContract => view('filament.topbar-hide-user-menu'),
-            )
-            // Inject a user avatar/button at the very bottom of the sidebar navigation.
-            ->renderHook(
-                PanelsRenderHook::SIDEBAR_NAV_END,
-                fn (): BladeViewContract => view('filament.sidebar-user'),
-            )
             ->tenant(Tenant::class, ownershipRelationship: 'tenant');
     }
 }
