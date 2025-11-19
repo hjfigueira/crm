@@ -9,9 +9,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tenant_user', function (Blueprint $table): void {
-            $table->foreignId('tenant_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('tenant_id');
+            $table->foreignId('user_id');
             $table->primary(['tenant_id', 'user_id']);
+            $table->foreign('tenant_id')
+                ->references('id')->on('tenants')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

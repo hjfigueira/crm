@@ -198,6 +198,11 @@
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor/yiisoft/injector" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/facade/ignition-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/stancl/jobpipeline" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/stancl/tenancy" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/stancl/virtualcolumn" />
+      <excludeFolder url="file://$MODULE_DIR$/src/storage/logs" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

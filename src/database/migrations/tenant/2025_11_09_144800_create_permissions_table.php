@@ -10,14 +10,10 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table): void {
             $table->id();
+            $table->timestamps();
             $table->string('name');
             $table->string('guard_name');
-            // Multi-tenant support: nullable to allow global permissions when null
-            $table->foreignId('tenant_id')->nullable()->constrained('tenants')->nullOnDelete();
-            $table->timestamps();
-
-            // In a multi-tenant app, permission names are unique per (tenant, guard)
-            $table->unique(['name', 'guard_name', 'tenant_id'], 'permissions_name_guard_tenant_unique');
+            $table->unique(['name', 'guard_name'], 'permissions_name_guard_tenant_unique');
         });
     }
 

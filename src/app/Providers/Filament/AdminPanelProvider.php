@@ -58,6 +58,9 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->tenant(Tenant::class, ownershipRelationship: 'tenant');
+            ->middleware([
+                \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
+//                \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+            ]);
     }
 }

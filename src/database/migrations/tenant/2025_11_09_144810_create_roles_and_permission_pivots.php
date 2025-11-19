@@ -12,10 +12,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('guard_name');
-            $table->foreignId('tenant_id')->nullable()->constrained('tenants')->nullOnDelete();
             $table->timestamps();
 
-            $table->unique(['name', 'guard_name', 'tenant_id'], 'roles_name_guard_tenant_unique');
+            $table->unique(['name', 'guard_name'], 'roles_name_guard_tenant_unique');
         });
 
         Schema::create('role_has_permissions', function (Blueprint $table): void {
