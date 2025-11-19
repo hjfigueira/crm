@@ -20,6 +20,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->singleton(LoginResponse::class, LoginRedirect::class);
     }
 }

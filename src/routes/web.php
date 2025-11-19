@@ -9,6 +9,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin/auth/session', function (Request $request) {
+    $sessionId = $request->query('session');
+
+    if (!$sessionId) {
+        abort(403, 'Invalid session');
+    }
+
+    // Set the session ID from the URL
+    $request->session()->setId($sessionId);
+    $request->session()->start();
+
+    // Verify user is authenticated
+    if (!\Illuminate\Support\Facades\Auth::check()) {
+        abort(403, 'Session invalid or expired');
+    }
+
+    // Redirect to admin panel
+    return redirect('/admin');
+})->middleware(['web', \App\Http\Middleware\InitializeTenancyByDomainOrFallback::class]);
+
 Route::post('/tenant/switch', function (Request $request) {
     $request->validate([
         'tenant_id' => ['required', 'integer'],
