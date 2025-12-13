@@ -29,7 +29,7 @@ COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
 RUN chown app:app /usr/local/bin/rr && chmod +x /usr/local/bin/rr
 
 # Copy application source code into the container
-COPY --chown=app:app . /app
+COPY --chown=app:app src /app
 
 USER app
 
