@@ -20,7 +20,15 @@ class InitializeTenancyByDomainOrFallback
         try {
             return app(InitializeTenancyByDomain::class)->handle($request, $next);
         } catch (TenantCouldNotBeIdentifiedOnDomainException $e) {
-            // Allow access without tenant for central domain
+            // Check if trying to access admin panel without tenant
+            if ($request->is('admin') || $request->is('admin/*')) {
+                // Only allow login and session transfer routes on central domain
+                if (!$request->is('admin/login') && !$request->is('admin/auth/session')) {
+                    abort(403, 'Admin panel is only accessible on tenant subdomains');
+                }
+            }
+
+            // Allow access without tenant for central domain (login page, etc.)
             return $next($request);
         }
     }

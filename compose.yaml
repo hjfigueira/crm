@@ -7,8 +7,6 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
-    volumes:
-      - ./src:/app
     environment:
       - PHP_IDE_CONFIG=serverName=docker
     extra_hosts:
