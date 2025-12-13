@@ -1,5 +1,7 @@
 FROM ghcr.io/roadrunner-server/roadrunner:2025.1.4 AS roadrunner
 
+FROM composer:2 AS composer
+
 FROM php:8.4-cli-alpine3.21
 
 # change version to latest if you want to use the latest version of xDebug, see https://xdebug.org
@@ -16,9 +18,8 @@ RUN apk add --no-cache autoconf g++ make postgresql-dev coreutils libzip-dev zip
 RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 COPY ./.docker/roadrunner/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod +x /usr/local/bin/composer
+# Copy Composer from the official Composer image for reliability and speed
+COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
 RUN addgroup -g 1000 app && adduser -u 1000 -G app -s /bin/sh -D app
 
@@ -30,6 +31,9 @@ RUN chown app:app /usr/local/bin/rr && chmod +x /usr/local/bin/rr
 
 # Copy Composer files first to leverage Docker layer caching, then install deps
 COPY --chown=app:app src/composer.json src/composer.lock /app/
+
+# Ensure /app is writable by the non-root user before running Composer
+RUN chown -R app:app /app
 
 USER app
 
