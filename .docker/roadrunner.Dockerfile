@@ -37,14 +37,18 @@ RUN chown -R app:app /app
 
 USER app
 
-# Install PHP dependencies (including require-dev) during build
-RUN composer install --no-interaction --prefer-dist --no-progress --ansi
+# Install PHP dependencies (including require-dev) during build, but skip scripts for now
+RUN composer install --no-interaction --prefer-dist --no-progress --ansi --no-scripts
 
 # Copy application source code into the container (after vendor install to improve caching)
 COPY --chown=app:app src /app
 
-# Ensure the cache and storage are writable (common for Laravel apps). Ignore errors if paths don't exist.
-RUN mkdir -p /app/storage /app/bootstrap/cache || true \
-    && chmod -R ug+rwX /app/storage /app/bootstrap/cache || true
+# Ensure the cache and storage are writable (needed for artisan package:discover)
+RUN mkdir -p /app/storage /app/bootstrap/cache \
+    && chmod -R ug+rwX /app/storage /app/bootstrap/cache
+
+# Now that the app source (including artisan) exists, run Composer scripts
+RUN composer dump-autoload -o \
+    && php artisan package:discover --ansi
 
 ENTRYPOINT ["/usr/local/bin/rr", "serve"]
