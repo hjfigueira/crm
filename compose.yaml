@@ -11,6 +11,8 @@ services:
       - PHP_IDE_CONFIG=serverName=docker
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    env_file:
+      - path: .env
 
   postgres:
     image: postgres:16-alpine
