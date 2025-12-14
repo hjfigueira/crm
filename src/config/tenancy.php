@@ -19,7 +19,7 @@ return [
     'central_domains' => [
         '127.0.0.1',
         'localhost',
-        'app.test'
+        env('TENANCY_CENTRAL_DOMAIN', 'app.test')
     ],
 
     /**
