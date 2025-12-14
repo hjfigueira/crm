@@ -17,6 +17,7 @@ services:
       retries: 10
 
   roadrunner:
+    entrypoint: ["rr", "serve", "-d", "-c", "/app/.rr.dev.yaml"]
     depends_on:
       - postgres
 
