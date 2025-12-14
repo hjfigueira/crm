@@ -16,5 +16,9 @@ services:
       timeout: 5s
       retries: 10
 
+  roadrunner:
+    depends_on:
+      - postgres
+
 volumes:
   pgdata:

@@ -5,8 +5,6 @@ services:
       dockerfile: .docker/roadrunner.Dockerfile
     ports:
       - "8080:8080"
-    depends_on:
-      - postgres
     environment:
       - PHP_IDE_CONFIG=serverName=docker
     extra_hosts:
