@@ -14,3 +14,6 @@ http:
   static:
     dir: "public"
     forbid: [ ".php" ]
+
+logs:
+  level: error
